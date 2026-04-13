@@ -37,7 +37,14 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git branch *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(chmod *)",
+      "Bash(./publish_update.sh *)",
+      "Bash(cat *)",
+      "Bash(\"$home/voiceink-dependencies/whisper.cpp/.local-build/sourcepackages/artifacts/sparkle/sparkle/bin/sign_update\" *)",
+      "Bash(\"$home/notext/.local-build/sourcepackages/checkouts/sparkle/bin/sign_update\" *)",
+      "Bash(/users/evelette/notext/.local-build/sourcepackages/artifacts/sparkle/sparkle/bin/sign_update *)"
     ]
   },
   "$version": 3
