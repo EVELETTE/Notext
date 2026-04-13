@@ -38,7 +38,8 @@ ZIP_SIZE=$(stat -f%z "$ZIP_PATH")
 
 # Sign the update
 echo "✍️ Signing update..."
-ED_SIGNATURE=$("$SPARKLE_BIN/sign_update" "$ZIP_PATH" 2>/dev/null | head -1 | sed 's/.*"\(.*\)".*/\1/')
+SIGN_OUTPUT=$("$SPARKLE_BIN/sign_update" "$ZIP_PATH" 2>&1)
+ED_SIGNATURE=$(echo "$SIGN_OUTPUT" | sed -n 's/.*sparkle:edSignature="\([^"]*\)".*/\1/p')
 
 if [ -z "$ED_SIGNATURE" ]; then
     echo "❌ Failed to sign update. Make sure Sparkle tools are built."

@@ -2,8 +2,20 @@
 <rss version="2.0" xmlns:sparkle="http://www.sparkle-project.org/xml/1.0">
   <channel>
     <title>Notext Updates</title>
-    <link>https://raw.githubusercontent.com/evelette/Notext/main/appcast.xml</link>
+    <link>https://raw.githubusercontent.com/EVELETTE/Notext/main/appcast.xml</link>
     <description>Most recent changes with links to updates.</description>
     <language>en</language>
+    <item>
+      <title>Version 1.73</title>
+      <pubDate>2026-04-13T18:25:41Z</pubDate>
+      <sparkle:version>173</sparkle:version>
+      <sparkle:shortVersionString>1.73</sparkle:shortVersionString>
+      <enclosure
+          url="https://github.com/EVELETTE/Notext/releases/download/v1.73/Notext.zip"
+          sparkle:edSignature="3JaQtDIWJMoDknyFouCyXhF62iSkYSYLB/zQ50tjzMex2dhV324ZDzvGMNmSE87TcIW2hhzYgzcQrYj/1Z6PCw=="
+          length="15676596"
+          type="application/octet-stream"
+      />
+    </item>
   </channel>
 </rss>
