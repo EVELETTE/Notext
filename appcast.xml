@@ -6,14 +6,14 @@
     <description>Most recent changes with links to updates.</description>
     <language>en</language>
     <item>
-      <title>Version 2.12b</title>
-      <pubDate>2026-04-13T18:29:46Z</pubDate>
-      <sparkle:version>212</sparkle:version>
-      <sparkle:shortVersionString>2.12b</sparkle:shortVersionString>
+      <title>Version 2.13</title>
+      <pubDate>2026-04-13T23:27:22Z</pubDate>
+      <sparkle:version>213</sparkle:version>
+      <sparkle:shortVersionString>2.13</sparkle:shortVersionString>
       <enclosure
-          url="https://github.com/EVELETTE/Notext/releases/download/v2.12b/Notext.zip"
-          sparkle:edSignature="BQIxxD2RoAKftR8iSD8LLPOvQPovOLX/0qIQFYKblyUon/B3d9U5l6lQ00cS/bjV+ZOL72WUBK7w2WkWZETKDQ=="
-          length="15676598"
+          url="https://github.com/EVELETTE/Notext/releases/download/v2.13/Notext.zip"
+          sparkle:edSignature="rNrc7IyvCw7aut4Ipm4rTVhguc9AmIWGFmKpYLIK0UJjxKhKq6Ifi7nVhrd9xDQiHcnOtFDqnY4/odUnwKMTCQ=="
+          length="11534368"
           type="application/octet-stream"
       />
     </item>
