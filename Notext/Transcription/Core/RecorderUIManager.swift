@@ -43,7 +43,7 @@ class RecorderUIManager: ObservableObject {
     private weak var engine: NotextEngine?
     private var recorder: Recorder?
 
-    private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "RecorderUIManager")
+    private let logger = Logger(subsystem: "com.evecorp.notext", category: "RecorderUIManager")
 
     init() {}
 

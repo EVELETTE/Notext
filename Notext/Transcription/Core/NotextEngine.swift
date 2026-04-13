@@ -26,7 +26,7 @@ class NotextEngine: NSObject, ObservableObject {
     let enhancementService: AIEnhancementService?
     private let pipeline: TranscriptionPipeline
 
-    let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "NotextEngine")
+    let logger = Logger(subsystem: "com.evecorp.notext", category: "NotextEngine")
 
     init(
         modelContext: ModelContext,
@@ -40,7 +40,7 @@ class NotextEngine: NSObject, ObservableObject {
         self.enhancementService = enhancementService
 
         let appSupportDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("com.prakashjoshipax.VoiceInk")
+            .appendingPathComponent("com.evecorp.Notext")
         self.recordingsDirectory = appSupportDirectory.appendingPathComponent("Recordings")
 
         self.serviceRegistry = TranscriptionServiceRegistry(

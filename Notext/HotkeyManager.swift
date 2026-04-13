@@ -53,7 +53,7 @@ class HotkeyManager: ObservableObject {
         }
     }
     
-    private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "HotkeyManager")
+    private let logger = Logger(subsystem: "com.evecorp.notext", category: "HotkeyManager")
     private var engine: NotextEngine
     private var recorderUIManager: RecorderUIManager
     private var miniRecorderShortcutManager: MiniRecorderShortcutManager

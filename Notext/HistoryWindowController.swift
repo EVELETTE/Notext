@@ -6,7 +6,7 @@ class HistoryWindowController: NSObject, NSWindowDelegate {
     static let shared = HistoryWindowController()
 
     private var historyWindow: NSWindow?
-    private let windowIdentifier = NSUserInterfaceItemIdentifier("com.prakashjoshipax.voiceink.historyWindow")
+    private let windowIdentifier = NSUserInterfaceItemIdentifier("com.evecorp.notext.historyWindow")
     private let windowAutosaveName = NSWindow.FrameAutosaveName("NotextHistoryWindowFrame")
 
     private override init() {

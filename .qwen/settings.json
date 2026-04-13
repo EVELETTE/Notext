@@ -44,7 +44,9 @@
       "Bash(cat *)",
       "Bash(\"$home/voiceink-dependencies/whisper.cpp/.local-build/sourcepackages/artifacts/sparkle/sparkle/bin/sign_update\" *)",
       "Bash(\"$home/notext/.local-build/sourcepackages/checkouts/sparkle/bin/sign_update\" *)",
-      "Bash(/users/evelette/notext/.local-build/sourcepackages/artifacts/sparkle/sparkle/bin/sign_update *)"
+      "Bash(/users/evelette/notext/.local-build/sourcepackages/artifacts/sparkle/sparkle/bin/sign_update *)",
+      "Bash(curl *)",
+      "Bash(sed *)"
     ]
   },
   "$version": 3

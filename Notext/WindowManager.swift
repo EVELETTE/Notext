@@ -5,11 +5,11 @@ import OSLog
 class WindowManager: NSObject {
     static let shared = WindowManager()
 
-    private static let mainWindowIdentifier = NSUserInterfaceItemIdentifier("com.prakashjoshipax.voiceink.mainWindow")
-    private static let onboardingWindowIdentifier = NSUserInterfaceItemIdentifier("com.prakashjoshipax.voiceink.onboardingWindow")
+    private static let mainWindowIdentifier = NSUserInterfaceItemIdentifier("com.evecorp.notext.mainWindow")
+    private static let onboardingWindowIdentifier = NSUserInterfaceItemIdentifier("com.evecorp.notext.onboardingWindow")
     private static let mainWindowAutosaveName = NSWindow.FrameAutosaveName("NotextMainWindowFrame")
 
-    private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "WindowManager")
+    private let logger = Logger(subsystem: "com.evecorp.notext", category: "WindowManager")
     private weak var mainWindow: NSWindow?
     private var didApplyInitialPlacement = false
 
