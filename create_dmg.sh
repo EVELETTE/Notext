@@ -100,13 +100,13 @@ STEP 1: INSTALL
   Drag "Notext.app" to the "Applications" folder.
 
 STEP 2: ALLOW IN SYSTEM SETTINGS
-  Since Notext is not signed with an Apple 
-  Developer certificate, macOS will block 
+  Since Notext is not signed with an Apple
+  Developer certificate, macOS will block
   it on first launch.
 
   To allow it:
   1. Open "System Settings"
-  2. Go to "Privacy & Security"  
+  2. Go to "Privacy & Security"
   3. Scroll down to Security
   4. Click "Open Anyway" next to Notext
   5. Enter your password if prompted
@@ -118,18 +118,28 @@ STEP 3: ENJOY!
 ===========================================
 README
 
-# ─── Create DMG ───
-hdiutil create -srcfolder /tmp/nx_staging -volname "Notext" -fs HFS+ \
-    -format UDRW -size 100m /tmp/nx_dmg_temp.dmg 2>/dev/null
+# ─── Create writable DMG ───
+echo "📀 Creating writable DMG..."
+hdiutil create -srcfolder /tmp/nx_staging -volname "Notext Install" -fs HFS+ \
+    -format UDRW -size 100m /tmp/nx_dmg_temp.dmg >/dev/null 2>&1
 
-# Mount
-MP=$(hdiutil attach -readwrite -noverify -noautoopen /tmp/nx_dmg_temp.dmg 2>/dev/null | grep "^/dev/" | head -1 | awk '{print $3}')
+# Mount and get mount point
+MOUNT_OUTPUT=$(hdiutil attach -readwrite -noverify -noautoopen /tmp/nx_dmg_temp.dmg 2>/dev/null)
+MOUNT_POINT=$(echo "$MOUNT_OUTPUT" | grep -o '/Volumes/Notext Install[^ ]*')
 
-# Set layout via AppleScript
-osascript << ASCEOF
-set bgPath to POSIX file "/Volumes/Notext/.background/bg.png"
-tell application "Finder"
-    tell disk "Notext"
+if [ -z "$MOUNT_POINT" ]; then
+    echo "❌ Failed to mount DMG"
+    exit 1
+fi
+
+echo "✓ Mounted at: $MOUNT_POINT"
+
+# ─── Create .DS_Store using osascript ───
+echo "💾 Creating .DS_Store with Finder settings..."
+
+osascript -e "
+tell application \"Finder\"
+    tell disk \"Notext Install\"
         open
         delay 3
         tell container window
@@ -138,32 +148,47 @@ tell application "Finder"
             set statusbar visible to false
             set bounds to {400, 180, 1060, 680}
         end tell
-        delay 1
+        delay 2
         tell icon view options of container window
             set icon size to 128
             set arrangement to not arranged
             set label position to bottom
             set shows icon preview to false
             set text size to 14
-            set background picture to bgPath
+            set background picture to POSIX file \"$MOUNT_POINT/.background/bg.png\"
         end tell
-        delay 1
-        set position of item "Notext.app" to {160, 140}
-        set position of item "Applications" to {500, 140}
+        delay 2
+        set position of item \"Notext.app\" to {160, 140}
+        set position of item \"Applications\" to {500, 140}
+        set position of item \"README.txt\" to {330, 350}
+        delay 2
         close
     end tell
 end tell
 delay 3
-ASCEOF
+" 2>&1 && echo "✓ Finder layout configured" || echo "⚠️ AppleScript had issues, trying fallback..."
 
-# Detach & compress
-sleep 1
-for vol in "/Volumes/Notext" "/Volumes/Notext 1" "/Volumes/Notext 2"; do
-    hdiutil detach "$vol" -force 2>/dev/null && sleep 1
-done
+# Force .DS_Store write
+sync
+sleep 2
+
+# Check .DS_Store
+DS_STORE="$MOUNT_POINT/.DS_Store"
+if [ -f "$DS_STORE" ]; then
+    SIZE=$(stat -f%z "$DS_STORE" 2>/dev/null || echo "0")
+    echo "✓ .DS_Store exists ($SIZE bytes)"
+else
+    echo "⚠️ WARNING: .DS_Store not found!"
+fi
+
+# ─── Detach & compress ───
+echo "📦 Compressing DMG..."
+sleep 2
+hdiutil detach "$MOUNT_POINT" -force >/dev/null 2>&1
+sleep 2
 
 hdiutil convert /tmp/nx_dmg_temp.dmg -format UDZO -imagekey zlib-level=9 \
-    -o "$DIST_DIR/Notext_Install.dmg" 2>/dev/null
+    -o "$DIST_DIR/Notext_Install.dmg" >/dev/null 2>&1
 
 # Cleanup
 rm -rf /tmp/nx_staging /tmp/nx_dmg* /tmp/nx /tmp/nx_bg.png /tmp/nx_gen_bg /tmp/nx_gen_bg.m 2>/dev/null

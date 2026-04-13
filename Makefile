@@ -103,13 +103,13 @@ release: check setup
 		OUTPUT_DIR="$(CURDIR)/dist"; \
 		mkdir -p "$$OUTPUT_DIR"; \
 		ZIP_PATH="$$OUTPUT_DIR/Notext.zip"; \
-		DMG_PATH="$$OUTPUT_DIR/Notext.dmg"; \
-		rm -f "$$ZIP_PATH" "$$DMG_PATH"; \
+		rm -f "$$ZIP_PATH"; \
 		ditto -c -k --keepParent "$$APP_PATH" "$$ZIP_PATH"; \
 		echo "✅ ZIP created: $$ZIP_PATH"; \
-		hdiutil create -volname "Notext" -srcfolder "$$APP_PATH" -ov "$$DMG_PATH" -format UDZO; \
-		echo "✅ DMG created: $$DMG_PATH"; \
 		xattr -cr "$$APP_PATH"; \
+		echo ""; \
+		echo "🎨 Creating custom installation DMG..."; \
+		$(CURDIR)/create_dmg.sh; \
 		echo ""; \
 		echo "🎉 Distribution packages ready!"; \
 		echo ""; \
@@ -118,10 +118,10 @@ release: check setup
 		echo ""; \
 		echo "📤 For GitHub Release:"; \
 		echo "   gh release create v$$VERSION --title \"Notext v$$VERSION\" --generate-notes"; \
-		echo "   gh release upload v$$VERSION $$ZIP_PATH $$DMG_PATH"; \
+		echo "   gh release upload v$$VERSION $$ZIP_PATH $$OUTPUT_DIR/Notext_Install.dmg"; \
 		echo ""; \
 		echo "👤 Users can now:"; \
-		echo "   - Download Notext.zip or Notext.dmg from GitHub Releases"; \
+		echo "   - Download Notext.zip or Notext_Install.dmg from GitHub Releases"; \
 		echo "   - Drag Notext.app to their Applications folder"; \
 		echo "   - Open the app (first time: System Settings > Privacy & Security > Open Anyway)"; \
 		echo ""; \
