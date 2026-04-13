@@ -37,7 +37,7 @@
 	<key>SUEnableInstallerLauncherService</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/evelette/Notext/main/appcast.xml</string>
+	<string>https://raw.githubusercontent.com/EVELETTE/Notext/main/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>6770kwK4H4l90aP1pXAeNlekt+PKc61Y15deHVHBGcs=</string>
 </dict>
