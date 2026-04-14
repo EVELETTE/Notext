@@ -99,6 +99,19 @@ release: check setup
 		echo ""; \
 		echo "📁 App location: $$APP_PATH"; \
 		echo ""; \
+		echo "🔑 Re-signing all embedded frameworks with ad-hoc identity..."; \
+		find "$$APP_PATH/Contents/Frameworks" -type f -name "*.dylib" -o -name "*.so" -o -name "whisper" | while read fw; do \
+			echo "   Re-signing: $$fw"; \
+			codesign --force --sign - --timestamp=none "$$fw" 2>/dev/null; \
+		done; \
+		find "$$APP_PATH/Contents/Frameworks" -type d -name "*.framework" | while read fw; do \
+			echo "   Re-signing: $$fw"; \
+			codesign --force --sign - --timestamp=none "$$fw" 2>/dev/null; \
+		done; \
+		echo "   Re-signing main app bundle..."; \
+		codesign --force --sign - --timestamp=none --entitlements $(CURDIR)/Notext/Notext.entitlements "$$APP_PATH" 2>/dev/null; \
+		echo "✅ All frameworks re-signed"; \
+		echo ""; \
 		echo "📦 Creating distribution packages..."; \
 		OUTPUT_DIR="$(CURDIR)/dist"; \
 		mkdir -p "$$OUTPUT_DIR"; \
